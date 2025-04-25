@@ -17,5 +17,5 @@ jobs:
       if: github.ref == 'refs/heads/master'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/output
+        publish_dir: .
         commit_message: "Publish: ${{ github.event.head_commit.message }}"

@@ -1,0 +1,20 @@
+name: Build and Publish
+
+on:
+  push
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+    - name: Compile with Grunt
+      uses: elstudio/actions-js-build/build@v4
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build/output
+        commit_message: "Publish: ${{ github.event.head_commit.message }}"
